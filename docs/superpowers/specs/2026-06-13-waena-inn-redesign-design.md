@@ -25,7 +25,7 @@ warm, minimalist, boutique, big rounded headings, rounded-corner cards, generous
 | Booking depth | **Full online card payment** via Stripe |
 | Capture model | **Authorize-now / capture-on-confirm** (`capture_method: manual`) |
 | Availability | **No live availability v1** — host manages conflicts manually; lightweight blocked-dates file |
-| Pricing math | Nightly × nights **+ cleaning fee + Hawaii GET/TAT taxes** (configurable, ~17.4–17.75%) |
+| Pricing math | Nightly × nights **+ cleaning fee + Hawaii GET/TAT taxes** (configurable, default ≈ 17.75%) |
 | Stripe | **Test mode** now; connect live account at handoff |
 | Stack | **Next.js (App Router) + TypeScript + Tailwind**, deployed on **Vercel** |
 | Booking record | Stripe + transactional email (Resend). **No database for v1.** |
@@ -39,7 +39,7 @@ warm, minimalist, boutique, big rounded headings, rounded-corner cards, generous
   a building of 1BR private suites: **by guest capacity (2 / 3 / 4 / 5+)** plus a **Featured** toggle.
 - **Suite detail** (dynamic `/suites/[slug]`) — photo gallery, description, amenities, rating,
   **booking widget** (dates + guests + live price breakdown), location blurb.
-- **Checkout** (`/book/[slug]` or `/checkout`) — guest details + Stripe Payment Element → confirmation.
+- **Checkout** (`/book/[slug]`) — guest details + Stripe Payment Element → confirmation page (`/book/[slug]/confirmed`).
 - **About** — Waena Inn story, Wailuku/Maui location, kamaʻāina-host angle.
 - **Contact** — email, contact form, location.
 - **Footer/legal** — Privacy Policy, Terms & Conditions, Cookie preferences (carried over).
