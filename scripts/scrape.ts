@@ -179,12 +179,15 @@ async function main() {
     const rating = normalizeRating(raw.ratingText)
     const reviewCount = raw.reviewCount ?? 0
 
-    // Track missing / placeholder fields
-    const missingFields: string[] = []
+    // Track missing / placeholder fields.
+    // The live site's JSON-LD never exposes bedrooms/bathrooms/beds/cleaningFee, so
+    // these are assumed defaults (studio = 1 / 1 / 1, fee 0) and must be flagged for the
+    // client to confirm rather than presented as sourced data.
+    const missingFields: string[] = ['bedrooms', 'bathrooms', 'beds', 'cleaningFee (assumed defaults — confirm with client)']
     if (!raw.priceText || pricePerNight === 0) missingFields.push('pricePerNight')
     if (!raw.description) missingFields.push('description')
     if (missingFields.length > 0) {
-      missing.push(`${slug}: missing [${missingFields.join(', ')}]`)
+      missing.push(`${slug}: assumed/missing [${missingFields.join(', ')}]`)
     }
 
     const description = raw.description || raw.name
