@@ -5,6 +5,8 @@ import { Gallery } from '@/components/Gallery'
 import { AmenityList } from '@/components/AmenityList'
 import { RatingPill } from '@/components/RatingPill'
 import { Button } from '@/components/Button'
+import { JsonLd } from '@/components/JsonLd'
+import { SITE } from '@/lib/site'
 
 export async function generateStaticParams() {
   return getAllSuites().map((s) => ({ slug: s.slug }))
@@ -20,8 +22,25 @@ export default async function SuiteDetail({ params }: { params: Promise<{ slug: 
   const { slug } = await params
   const suite = getSuite(slug)
   if (!suite) notFound()
+  const ldData: Record<string, unknown> = {
+    '@context': 'https://schema.org',
+    '@type': 'LodgingBusiness',
+    name: suite.name,
+    image: `${SITE.url}${suite.photos[0]}`,
+    address: SITE.address,
+    priceRange: `$${suite.pricePerNight}`,
+  }
+  if (suite.reviewCount > 0) {
+    ldData.aggregateRating = {
+      '@type': 'AggregateRating',
+      ratingValue: suite.rating,
+      reviewCount: suite.reviewCount,
+    }
+  }
   return (
-    <Section className="grid gap-10 lg:grid-cols-[1.6fr_1fr]">
+    <>
+      <JsonLd data={ldData} />
+      <Section className="grid gap-10 lg:grid-cols-[1.6fr_1fr]">
       <div>
         <Gallery photos={suite.photos} alt={suite.name} />
         <div className="mt-8">
@@ -44,5 +63,6 @@ export default async function SuiteDetail({ params }: { params: Promise<{ slug: 
         </div>
       </aside>
     </Section>
+    </>
   )
 }
