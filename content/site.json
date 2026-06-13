@@ -1,0 +1,8 @@
+{
+  "about": {
+    "heading": "Welcome to Waena Inn",
+    "body": "TODO(client): the live About page renders no body text. Replace this with the real Waena Inn story — kamaʻāina hosts, the Wailuku location, and what makes a stay here special.",
+    "highlights": ["Central Wailuku location", "Kamaʻāina hospitality", "Self check-in, 24/7"]
+  },
+  "testimonials": []
+}
