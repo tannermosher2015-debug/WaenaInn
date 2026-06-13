@@ -1,36 +1,64 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Waena Inn
 
-## Getting Started
+Boutique vacation-lodging website for **Waena Inn** — private suites in Wailuku, Maui.
+A redesign of the previous site (`uncletonyshale.holidayfuture.com`), built for Frontline Web Designs.
 
-First, run the development server:
+Design direction: warm Maui-boutique aesthetic (sand / espresso / clay / palm-teal).
+
+## Stack
+
+- **Next.js 16** (App Router) + **React 19** + **TypeScript**
+- **Tailwind CSS v4** (theme tokens in `src/app/globals.css` `@theme`)
+- **Zod v4** for content validation
+- **Vitest** for unit tests, **Playwright** for the content scrape
+- Deploy target: **Vercel**
+
+## Scripts
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run dev      # local dev server (http://localhost:3000)
+npm run build    # production build (statically generates all pages)
+npm start        # serve the production build
+npm test         # run unit tests (schema, parser, components, filter)
+npm run scrape   # re-pull suite content + photos from the live source site
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Project structure
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- `src/app` — routes: `/` (home), `/suites` (filterable grid), `/suites/[slug]` (detail + gallery), `/about`, `/contact`, plus `sitemap.ts` / `robots.ts`.
+- `src/components` — `Nav`, `Footer`, `Button`, `SuiteCard`, `Gallery`, `RatingPill`, `AmenityList`, `Section`, `JsonLd`.
+- `src/lib` — `site.ts` (brand constants), `suites.ts` + `suites.schema.ts` (typed content loader), `filterSuites.ts`, `siteContent.ts`.
+- `content/suites/*.json` — 18 real suites (scraped). `content/site.json` — about copy.
+- `public/suites/<slug>/*.jpg` — real suite photos (the client's own assets).
+- `scripts/` — `scrape.ts` (Playwright runner) + `parseSuite.ts` (pure parser, tested).
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Deploy to Vercel
 
-## Learn More
+1. Push this repo to GitHub.
+2. Import it in Vercel (framework auto-detected as Next.js).
+3. Set the production **domain** and (later) the booking env vars from `.env.example`.
+4. `git push` → Vercel auto-deploys. Update `SITE.url` in `src/lib/site.ts` to the final domain (used by sitemap, metadata, and JSON-LD).
 
-To learn more about Next.js, take a look at the following resources:
+## Status
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+**Phase 1 — Content & browse site: complete.** All pages, real scraped content, filterable
+suites, SEO (sitemap/robots/`LodgingBusiness` JSON-LD), responsive + WCAG-AA verified.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+**Phase 2 — Booking & payments: planned** (`docs/superpowers/plans/2026-06-13-waena-inn-booking-payments.md`).
+Stripe authorize-now / capture-on-confirm checkout, Hawaii-tax price math, host email. The suite
+detail page currently shows a "Request to book" CTA pointing to `/contact` as the seam for that work.
 
-## Deploy on Vercel
+## Outstanding items to confirm with the client
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+These were not available from the source site and are flagged in code as `TODO(client)`:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Pricing** — every suite scraped as a flat `$200/night` (the live site shows a base rate without
+  date selection). Confirm real nightly rates / seasonal pricing.
+- **Cleaning fee** — unknown (defaulted to `$0`/placeholder).
+- **Bedrooms / bathrooms / beds** — not exposed by the source; assumed `1 / 1 / 1` (studio units).
+- **Tax rate** — default Maui GET + TAT + county ≈ **17.75%**; confirm with the client's accountant.
+- **Phone & street address** — not published on the source; site is email-only until provided
+  (`src/lib/site.ts`).
+- **About copy** — the source About page had no body text; `content/site.json` has a flagged placeholder.
+- **Production domain** — set `SITE.url` once chosen.
+- **Stripe + Resend accounts** — needed to go live with bookings (Phase 2).
