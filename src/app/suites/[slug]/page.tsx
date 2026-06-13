@@ -4,7 +4,7 @@ import { Section } from '@/components/Section'
 import { Gallery } from '@/components/Gallery'
 import { AmenityList } from '@/components/AmenityList'
 import { RatingPill } from '@/components/RatingPill'
-import { Button } from '@/components/Button'
+import { BookingWidget } from '@/components/BookingWidget'
 import { JsonLd } from '@/components/JsonLd'
 import { SITE } from '@/lib/site'
 
@@ -55,12 +55,7 @@ export default async function SuiteDetail({ params }: { params: Promise<{ slug: 
         </div>
       </div>
       <aside className="lg:sticky lg:top-24 lg:self-start">
-        <div className="rounded-card bg-white p-6 shadow-soft ring-1 ring-taupe/50">
-          <p><span className="text-2xl font-semibold text-clay">${suite.pricePerNight}</span><span className="text-espresso/60"> / night</span></p>
-          {/* Full booking widget arrives in the booking/payments plan; for now a clear CTA */}
-          <Button href="/contact" className="mt-5 w-full">Request to book</Button>
-          <p className="mt-3 text-center text-xs text-espresso/50">Dates subject to host confirmation.</p>
-        </div>
+        <BookingWidget suite={suite} />
       </aside>
     </Section>
     </>
