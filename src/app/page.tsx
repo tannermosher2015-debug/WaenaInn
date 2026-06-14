@@ -36,28 +36,25 @@ function Eyebrow({ children }: { children: React.ReactNode }) {
 export default function Home() {
   const suites = getAllSuites()
   const featured = suites.filter((s) => s.featured).slice(0, 3)
-  const hero = suites.find((s) => s.slug === 'unit-14') ?? suites[0]
   const avg = suites.length ? suites.reduce((a, s) => a + s.rating, 0) / suites.length : 0
   const maxGuests = Math.max(6, ...suites.map((s) => s.maxGuests))
-  const mosaic = suites.filter((s) => s.slug !== hero?.slug).slice(0, 5)
+  const mosaic = suites.slice(0, 5)
 
   return (
     <>
       {/* ===== Immersive hero ===== */}
       <section className="relative isolate overflow-hidden">
-        {hero && (
-          <div className="absolute inset-0 -z-10">
-            <Image
-              src={hero.photos[0]}
-              alt=""
-              fill
-              priority
-              sizes="100vw"
-              className="animate-kenburns object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-espresso/95 via-espresso/55 to-espresso/30" />
-          </div>
-        )}
+        <div className="absolute inset-0 -z-10">
+          <Image
+            src="/hero-maui-waves.jpg"
+            alt="Waves rolling onto a Maui beach at golden hour"
+            fill
+            priority
+            sizes="100vw"
+            className="animate-kenburns object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-espresso/95 via-espresso/55 to-espresso/30" />
+        </div>
         <div className="container-page flex min-h-[82vh] flex-col justify-end pb-14 pt-28 text-sand">
           {avg > 0 && (
             <span className="inline-flex w-fit items-center gap-1.5 rounded-full bg-sand/15 px-3 py-1 text-xs font-medium ring-1 ring-sand/30 backdrop-blur">
