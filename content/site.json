@@ -1,8 +1,19 @@
 {
   "about": {
-    "heading": "Welcome to Waena Inn",
-    "body": "TODO(client): the live About page renders no body text. Replace this with the real Waena Inn story — kamaʻāina hosts, the Wailuku location, and what makes a stay here special.",
-    "highlights": ["Central Wailuku location", "Kamaʻāina hospitality", "Self check-in, 24/7"]
+    "heading": "Waena means “center.”",
+    "intro": "Waena means “center” in Hawaiian, and that is exactly what we offer — a peaceful, comfortable place in the heart of Maui.",
+    "body": [
+      "Located in historic Wailuku Town, Waena Inn is a locally-owned boutique lodging created for travelers who want convenience, comfort, and genuine aloha.",
+      "We’re just 8 to 10 minutes from Kahului Airport (OGG), Maui Memorial Hospital, Wailuku Town, Iao Valley, business centers, and some of the island’s most meaningful cultural sites. Whether you are here to explore Maui, work remotely, serve as a traveling medical professional, or simply need a calm home base, Waena Inn provides a stay that is both easy and welcoming.",
+      "Our rooms are thoughtfully prepared with clean finishes, reliable Wi-Fi, self check-in, on-site free ample parking, and the small touches that make you feel taken care of. We believe in hospitality that is simple, sincere, and grounded in local values — respect, care, and community.",
+      "As a kamaʻāina-owned business, we are committed to supporting our local neighborhood and providing accommodations that are fair, comfortable, and connected to Maui’s spirit. We welcome respectful guests from around the world who appreciate staying in a space that honors place, culture, and people."
+    ],
+    "closing": "Stay central. Stay comfortable. Stay with aloha.",
+    "highlights": [
+      "8–10 minutes from Kahului Airport (OGG)",
+      "Kamaʻāina-owned & operated",
+      "Self check-in · Free parking · Fast Wi-Fi"
+    ]
   },
   "testimonials": []
 }

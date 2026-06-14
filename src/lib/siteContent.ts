@@ -3,7 +3,13 @@ import fs from 'node:fs'
 import path from 'node:path'
 
 export interface SiteContent {
-  about: { heading: string; body: string; highlights: string[] }
+  about: {
+    heading: string
+    intro: string
+    body: string[]
+    closing: string
+    highlights: string[]
+  }
   testimonials: { name: string; quote: string }[]
 }
 
