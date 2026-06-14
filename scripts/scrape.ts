@@ -15,6 +15,8 @@ import fs from 'node:fs'
 import path from 'node:path'
 import { parseSuiteCards, parseListingPage } from './parseSuite'
 
+const FIXTURES_DIR = path.join(process.cwd(), 'tests', 'fixtures')
+
 const ROOT = 'https://uncletonyshale.holidayfuture.com'
 
 const SHARED_AMENITIES = [
@@ -104,6 +106,56 @@ async function renderPage(browser: Browser, url: string): Promise<string> {
   }
 }
 
+/**
+ * renderAllListings — renders /all-listings with scroll-to-bottom to trigger
+ * lazy-loading and waits until no new listings appear for two consecutive
+ * scroll passes. Returns the final rendered HTML.
+ */
+async function renderAllListings(browser: Browser, url: string): Promise<string> {
+  const page = await browser.newPage()
+  try {
+    await page.goto(url, { waitUntil: 'networkidle', timeout: 60000 })
+
+    // Scroll loop: keep scrolling until the listing count stabilises
+    let prevCount = 0
+    let sameCount = 0
+    const maxPasses = 20
+
+    for (let pass = 0; pass < maxPasses; pass++) {
+      // Scroll to the very bottom
+      await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight))
+      // Wait for any lazy-load / pagination XHR to settle
+      await page.waitForTimeout(1500)
+      try {
+        await page.waitForLoadState('networkidle', { timeout: 8000 })
+      } catch {
+        // networkidle timeout is OK — just keep scrolling
+      }
+
+      const html = await page.content()
+      const matches = html.match(/href="\/listings\/\d+"/g) ?? []
+      const uniqueIds = new Set(matches.map((s) => s.match(/\d+/)?.[0]))
+      const count = uniqueIds.size
+      console.log(`  Scroll pass ${pass + 1}: ${count} unique listing IDs visible`)
+
+      if (count === prevCount) {
+        sameCount++
+        if (sameCount >= 2) {
+          console.log(`  Count stable at ${count} — stopping scroll`)
+          break
+        }
+      } else {
+        sameCount = 0
+        prevCount = count
+      }
+    }
+
+    return await page.content()
+  } finally {
+    await page.close()
+  }
+}
+
 async function main() {
   console.log('=== Waena Inn scrape pipeline ===')
   console.log(`ROOT: ${ROOT}`)
@@ -113,9 +165,13 @@ async function main() {
 
   const browser = await chromium.launch({ headless: true })
 
-  // Step 1: Get all listing IDs from the all-listings page
-  console.log('\n[1/4] Rendering all-listings page...')
-  const allListingsHtml = await renderPage(browser, `${ROOT}/all-listings`)
+  // Step 1: Get all listing IDs from the all-listings page (scroll to trigger lazy-load)
+  console.log('\n[1/4] Rendering all-listings page (with scroll-to-load)...')
+  fs.mkdirSync(FIXTURES_DIR, { recursive: true })
+  const allListingsHtml = await renderAllListings(browser, `${ROOT}/all-listings`)
+  // Save fixture for reference / debugging
+  fs.writeFileSync(path.join(FIXTURES_DIR, 'all-listings.html'), allListingsHtml)
+  console.log('  Saved tests/fixtures/all-listings.html')
   const cards = parseSuiteCards(allListingsHtml)
   const listingIds = cards.map((c) => c.listingId).filter(Boolean) as string[]
   console.log(`  Found ${listingIds.length} listing IDs: ${listingIds.join(', ')}`)
