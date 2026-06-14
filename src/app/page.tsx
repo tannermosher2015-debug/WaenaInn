@@ -6,6 +6,9 @@ import { SuiteCard } from '@/components/SuiteCard'
 import { Button } from '@/components/Button'
 import { Reveal } from '@/components/Reveal'
 import { HeroSearch } from '@/components/HeroSearch'
+import { Reviews } from '@/components/Reviews'
+import { Stars } from '@/components/Stars'
+import { getSiteContent } from '@/lib/siteContent'
 
 const WHY = [
   {
@@ -36,6 +39,7 @@ function Eyebrow({ children }: { children: React.ReactNode }) {
 export default function Home() {
   const suites = getAllSuites()
   const featured = suites.filter((s) => s.featured).slice(0, 3)
+  const reviews = getSiteContent().testimonials
   const avg = suites.length ? suites.reduce((a, s) => a + s.rating, 0) / suites.length : 0
   const maxGuests = Math.max(6, ...suites.map((s) => s.maxGuests))
   const mosaic = suites.slice(0, 5)
@@ -174,15 +178,32 @@ export default function Home() {
         </Reveal>
       </Section>
 
-      {/* ===== Social proof ===== */}
-      <Section className="!pt-0">
-        <Reveal className="text-center">
-          <p className="font-display text-6xl font-semibold text-clay">★ {avg.toFixed(1)}</p>
-          <p className="mx-auto mt-3 max-w-xl text-espresso/70">
-            Guests rate our suites {avg.toFixed(1)} out of 5 across {suites.length} private stays in the heart of Maui.
-          </p>
-        </Reveal>
-      </Section>
+      {/* ===== Guest reviews ===== */}
+      {reviews.length > 0 && (
+        <Section className="!pt-0">
+          <Reveal className="mb-10 text-center">
+            <Eyebrow>Reviews from Google</Eyebrow>
+            <h2 className="mt-2 text-4xl font-semibold">Loved by guests</h2>
+            <div className="mt-3 flex items-center justify-center gap-2">
+              <Stars rating={5} className="text-lg" />
+              <span className="text-sm text-espresso/60">Recent 5-star stays in Wailuku</span>
+            </div>
+          </Reveal>
+          <Reveal>
+            <Reviews reviews={reviews} />
+          </Reveal>
+          <Reveal className="mt-8 text-center">
+            <a
+              href={SITE.googleUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm font-medium text-clay hover:underline"
+            >
+              Read all reviews on Google →
+            </a>
+          </Reveal>
+        </Section>
+      )}
 
       {/* ===== CTA band ===== */}
       <Section className="!pt-0">

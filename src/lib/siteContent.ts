@@ -10,7 +10,14 @@ export interface SiteContent {
     closing: string
     highlights: string[]
   }
-  testimonials: { name: string; quote: string }[]
+  testimonials: {
+    name: string
+    rating: number
+    date: string
+    badge?: string
+    text: string
+    response?: string
+  }[]
 }
 
 export function getSiteContent(): SiteContent {
