@@ -14,6 +14,14 @@ export function SuiteCard({ suite }: { suite: Suite }) {
       <div className="p-5">
         <h3 className="text-lg font-semibold">{suite.name}</h3>
         <p className="mt-1 text-sm text-espresso/60">Up to {suite.maxGuests} guests · {suite.bedrooms} BR</p>
+        <ul className="mt-3 flex flex-wrap gap-x-3 gap-y-1 text-xs text-espresso/55">
+          {['Self check-in', 'Free parking', 'Wi-Fi'].map((perk) => (
+            <li key={perk} className="flex items-center gap-1">
+              <span aria-hidden className="text-palm">✓</span>
+              {perk}
+            </li>
+          ))}
+        </ul>
         <p className="mt-3"><span className="text-xl font-semibold text-clay">${suite.pricePerNight}</span>
           <span className="text-sm text-espresso/60"> / night</span></p>
       </div>

@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import { Stars } from './Stars'
 
 export interface Review {
@@ -7,6 +8,7 @@ export interface Review {
   badge?: string
   text: string
   response?: string
+  photos?: string[]
 }
 
 const AVATAR_COLORS = ['bg-clay', 'bg-palm', 'bg-espresso']
@@ -37,6 +39,15 @@ function ReviewCard({ r }: { r: Review }) {
         <span className="text-xs text-espresso/50">{r.date}</span>
       </div>
       <blockquote className="mt-3 text-sm leading-relaxed text-espresso/80">{r.text}</blockquote>
+      {r.photos && r.photos.length > 0 && (
+        <div className="mt-3 flex gap-2">
+          {r.photos.slice(0, 3).map((p) => (
+            <div key={p} className="relative h-20 w-20 shrink-0 overflow-hidden rounded-lg ring-1 ring-taupe/50">
+              <Image src={p} alt="" fill sizes="80px" className="object-cover" />
+            </div>
+          ))}
+        </div>
+      )}
       {r.response && (
         <div className="mt-4 rounded-xl bg-sand/70 p-3">
           <p className="text-xs font-semibold text-espresso/80">Response from Waena Inn</p>

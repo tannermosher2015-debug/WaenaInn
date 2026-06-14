@@ -17,6 +17,7 @@ export interface SiteContent {
     badge?: string
     text: string
     response?: string
+    photos?: string[]
   }[]
 }
 
