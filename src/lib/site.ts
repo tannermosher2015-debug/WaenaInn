@@ -4,6 +4,7 @@ export const SITE = {
   email: 'uncletonyshale@gmail.com',
   phone: '', // TODO(client): confirm phone or leave email-only
   address: 'Wailuku, Maui, HI', // TODO(client): confirm street address
+  mapQuery: 'Waena Inn, Wailuku, HI', // pins the Google Business listing on the embedded map
   url: 'https://waenainn.com', // TODO(client): confirm production domain
   nav: [
     { href: '/', label: 'Home' },
