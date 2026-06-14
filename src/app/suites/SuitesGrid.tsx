@@ -10,8 +10,14 @@ const ALL_TABS: { label: string; value: Capacity }[] = [
   { label: '3 guests', value: 3 }, { label: '4 guests', value: 4 }, { label: '5+ guests', value: '5+' },
 ]
 
-export function SuitesGrid({ suites }: { suites: Suite[] }) {
-  const [capacity, setCapacity] = useState<Capacity>('all')
+export function SuitesGrid({
+  suites,
+  initialCapacity = 'all',
+}: {
+  suites: Suite[]
+  initialCapacity?: Capacity
+}) {
+  const [capacity, setCapacity] = useState<Capacity>(initialCapacity)
   const [featuredOnly, setFeaturedOnly] = useState(false)
   // Only show capacity tabs that actually match at least one suite (keeps "All").
   const tabs = ALL_TABS.filter(
