@@ -15,6 +15,9 @@
 }
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
   body {
     @apply bg-sand text-espresso font-sans antialiased;
   }
@@ -55,6 +58,9 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
   .animate-kenburns {
     animation: none;
   }

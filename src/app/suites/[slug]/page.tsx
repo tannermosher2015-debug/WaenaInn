@@ -5,6 +5,7 @@ import { Gallery } from '@/components/Gallery'
 import { AmenityList } from '@/components/AmenityList'
 import { RatingPill } from '@/components/RatingPill'
 import { BookingWidget } from '@/components/BookingWidget'
+import { StickyBookBar } from '@/components/StickyBookBar'
 import { JsonLd } from '@/components/JsonLd'
 import { Reviews } from '@/components/Reviews'
 import { SITE } from '@/lib/site'
@@ -76,7 +77,7 @@ export default async function SuiteDetail({ params }: { params: Promise<{ slug: 
           )}
         </div>
       </div>
-      <aside className="lg:sticky lg:top-24 lg:self-start">
+      <aside id="book" className="scroll-mt-28 lg:sticky lg:top-24 lg:self-start">
         <BookingWidget suite={suite} />
         <ul className="mt-4 space-y-2 px-1 text-xs text-espresso/70">
           {TRUST.map((t) => (
@@ -88,6 +89,7 @@ export default async function SuiteDetail({ params }: { params: Promise<{ slug: 
         </ul>
       </aside>
     </Section>
+    <StickyBookBar price={suite.pricePerNight} />
     </>
   )
 }
