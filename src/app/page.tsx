@@ -8,6 +8,7 @@ import { Reveal } from '@/components/Reveal'
 import { HeroSearch } from '@/components/HeroSearch'
 import { Reviews } from '@/components/Reviews'
 import { Stars } from '@/components/Stars'
+import { Faq } from '@/components/Faq'
 import { getSiteContent } from '@/lib/siteContent'
 
 const WHY = [
@@ -204,6 +205,17 @@ export default function Home() {
           </Reveal>
         </Section>
       )}
+
+      {/* ===== FAQ ===== */}
+      <Section className="!pt-0">
+        <Reveal className="mb-10 text-center">
+          <Eyebrow>Good to know</Eyebrow>
+          <h2 className="mt-2 text-4xl font-semibold">Booking questions, answered</h2>
+        </Reveal>
+        <Reveal>
+          <Faq />
+        </Reveal>
+      </Section>
 
       {/* ===== CTA band ===== */}
       <Section className="!pt-0">

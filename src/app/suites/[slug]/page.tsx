@@ -6,7 +6,16 @@ import { AmenityList } from '@/components/AmenityList'
 import { RatingPill } from '@/components/RatingPill'
 import { BookingWidget } from '@/components/BookingWidget'
 import { JsonLd } from '@/components/JsonLd'
+import { Reviews } from '@/components/Reviews'
 import { SITE } from '@/lib/site'
+import { getSiteContent } from '@/lib/siteContent'
+
+const TRUST = [
+  'Self check-in, any hour',
+  'Free on-site parking',
+  'Fast Wi-Fi & mini kitchen',
+  'Kamaʻāina host — fast replies',
+]
 
 export async function generateStaticParams() {
   return getAllSuites().map((s) => ({ slug: s.slug }))
@@ -22,6 +31,7 @@ export default async function SuiteDetail({ params }: { params: Promise<{ slug: 
   const { slug } = await params
   const suite = getSuite(slug)
   if (!suite) notFound()
+  const reviews = getSiteContent().testimonials
   const ldData: Record<string, unknown> = {
     '@context': 'https://schema.org',
     '@type': 'LodgingBusiness',
@@ -52,10 +62,30 @@ export default async function SuiteDetail({ params }: { params: Promise<{ slug: 
           <p className="mt-6 whitespace-pre-line leading-relaxed text-espresso/80">{suite.description}</p>
           <h2 className="mt-10 text-xl font-semibold">Amenities</h2>
           <div className="mt-4"><AmenityList amenities={suite.amenities} /></div>
+
+          {reviews.length > 0 && (
+            <div className="mt-12">
+              <div className="flex items-baseline justify-between gap-4">
+                <h2 className="text-xl font-semibold">What guests say</h2>
+                <a href={SITE.googleUrl} target="_blank" rel="noopener noreferrer" className="shrink-0 text-sm font-medium text-clay hover:underline">
+                  All reviews →
+                </a>
+              </div>
+              <div className="mt-4"><Reviews reviews={reviews.slice(0, 2)} /></div>
+            </div>
+          )}
         </div>
       </div>
       <aside className="lg:sticky lg:top-24 lg:self-start">
         <BookingWidget suite={suite} />
+        <ul className="mt-4 space-y-2 px-1 text-xs text-espresso/70">
+          {TRUST.map((t) => (
+            <li key={t} className="flex items-center gap-2">
+              <span aria-hidden className="text-palm">✓</span>
+              {t}
+            </li>
+          ))}
+        </ul>
       </aside>
     </Section>
     </>
