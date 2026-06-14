@@ -2,7 +2,7 @@ import { Section } from '@/components/Section'
 import { MapEmbed } from '@/components/MapEmbed'
 import { SITE } from '@/lib/site'
 
-export const metadata = { title: 'Contact' }
+export const metadata = { title: 'Contact', alternates: { canonical: '/contact' } }
 export default function Contact() {
   return (
     <Section className="max-w-xl">

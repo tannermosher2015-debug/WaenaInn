@@ -2,7 +2,7 @@ import { getSiteContent } from '@/lib/siteContent'
 import { Section } from '@/components/Section'
 import { SITE } from '@/lib/site'
 
-export const metadata = { title: 'About' }
+export const metadata = { title: 'About', alternates: { canonical: '/about' } }
 export default function About() {
   const { about } = getSiteContent()
   return (

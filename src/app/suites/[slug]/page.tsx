@@ -25,7 +25,27 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
   const s = getSuite(slug)
-  return s ? { title: s.name, description: s.summary } : {}
+  if (!s) return {}
+  const description = `${s.name} — sleeps up to ${s.maxGuests} in central Wailuku, Maui. Self check-in, free parking, fast Wi-Fi. From $${s.pricePerNight}/night.`
+  const url = `/suites/${s.slug}`
+  return {
+    title: s.name,
+    description,
+    alternates: { canonical: url },
+    openGraph: {
+      type: 'website',
+      title: s.name,
+      description,
+      url,
+      images: [{ url: s.photos[0], alt: s.name }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: s.name,
+      description,
+      images: [s.photos[0]],
+    },
+  }
 }
 
 export default async function SuiteDetail({ params }: { params: Promise<{ slug: string }> }) {

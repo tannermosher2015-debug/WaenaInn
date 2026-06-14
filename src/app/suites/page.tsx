@@ -2,7 +2,7 @@ import { getAllSuites } from '@/lib/suites'
 import { filterSuites, type Capacity } from '@/lib/filterSuites'
 import { SuitesGrid } from './SuitesGrid'
 
-export const metadata = { title: 'Suites' }
+export const metadata = { title: 'Suites', alternates: { canonical: '/suites' } }
 
 function toCapacity(guests?: string): Capacity {
   const n = Number(guests)

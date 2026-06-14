@@ -9,7 +9,10 @@ import { HeroSearch } from '@/components/HeroSearch'
 import { Reviews } from '@/components/Reviews'
 import { Stars } from '@/components/Stars'
 import { Faq } from '@/components/Faq'
+import { JsonLd } from '@/components/JsonLd'
 import { getSiteContent } from '@/lib/siteContent'
+
+export const metadata = { alternates: { canonical: '/' } }
 
 const WHY = [
   {
@@ -44,9 +47,40 @@ export default function Home() {
   const avg = suites.length ? suites.reduce((a, s) => a + s.rating, 0) / suites.length : 0
   const maxGuests = Math.max(6, ...suites.map((s) => s.maxGuests))
   const mosaic = suites.slice(0, 5)
+  const businessLd = {
+    '@context': 'https://schema.org',
+    '@type': 'LodgingBusiness',
+    name: SITE.name,
+    description: SITE.tagline,
+    url: SITE.url,
+    image: `${SITE.url}/hero-maui-waves.jpg`,
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Wailuku',
+      addressRegion: 'HI',
+      addressCountry: 'US',
+    },
+    areaServed: 'Maui, Hawaii',
+    priceRange: '$$',
+    ...(reviews.length > 0 && {
+      aggregateRating: {
+        '@type': 'AggregateRating',
+        ratingValue: 5,
+        reviewCount: reviews.length,
+        bestRating: 5,
+      },
+      review: reviews.map((r) => ({
+        '@type': 'Review',
+        author: { '@type': 'Person', name: r.name },
+        reviewRating: { '@type': 'Rating', ratingValue: r.rating, bestRating: 5 },
+        reviewBody: r.text,
+      })),
+    }),
+  }
 
   return (
     <>
+      <JsonLd data={businessLd} />
       {/* ===== Immersive hero ===== */}
       <section className="relative isolate overflow-hidden">
         <div className="absolute inset-0 -z-10">
