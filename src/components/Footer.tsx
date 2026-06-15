@@ -19,7 +19,20 @@ export function Footer() {
           <li><Link href="/contact" className="hover:text-clay">Contact Us</Link></li>
         </ul>
       </div>
-      <div className="container-page border-t border-white/10 py-6 text-xs">© {new Date().getFullYear()} {SITE.name}</div>
+      <div className="container-page flex flex-col gap-2 border-t border-white/10 py-6 text-xs sm:flex-row sm:items-center sm:justify-between">
+        <p>© {new Date().getFullYear()} {SITE.name}</p>
+        <p>
+          Designed by{' '}
+          <a
+            href="https://frontlinewebdesign.tech"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-medium text-sand hover:text-clay"
+          >
+            Frontline Web Designs
+          </a>
+        </p>
+      </div>
     </footer>
   )
 }
