@@ -251,20 +251,44 @@ export default function Home() {
         </Reveal>
       </Section>
 
-      {/* ===== CTA band ===== */}
-      <Section className="!pt-0">
-        <Reveal>
-          <div className="rounded-card bg-espresso px-8 py-16 text-center text-sand">
-            <h2 className="text-4xl font-semibold">Stay central. Stay comfortable.</h2>
-            <p className="mx-auto mt-3 max-w-xl text-sand/80">
-              Stay with aloha. Your Maui home base is waiting.
+      {/* ===== Closing CTA — full-bleed sunset ===== */}
+      <section className="relative isolate mt-24 overflow-hidden">
+        <div className="absolute inset-0 -z-10">
+          <Image
+            src="/cta-sunset.jpg"
+            alt="Sunset over a Maui beach with palm trees"
+            fill
+            sizes="100vw"
+            className="animate-kenburns object-cover"
+          />
+          <div className="absolute inset-0 bg-espresso/75" />
+        </div>
+        <div className="container-page py-24 text-center text-sand sm:py-32">
+          <Reveal>
+            <p className="text-sm uppercase tracking-widest text-sand/70">Your Maui home base awaits</p>
+            <h2 className="mx-auto mt-4 max-w-3xl text-4xl font-semibold leading-[1.08] sm:text-6xl">
+              Stay central. Stay comfortable.
+              <br />
+              Stay with aloha.
+            </h2>
+            <p className="mx-auto mt-5 max-w-xl text-lg text-sand/85">
+              A private suite in the heart of Wailuku — minutes from the airport, Iao Valley, and Maui’s best beaches.
             </p>
-            <div className="mt-8">
+            <div className="mt-9 flex flex-wrap justify-center gap-3">
               <Button href="/suites">Book a stay</Button>
+              <a
+                href="/suites"
+                className="inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-medium text-sand ring-1 ring-sand/40 transition hover:bg-sand/10"
+              >
+                Browse all {suites.length} suites
+              </a>
             </div>
-          </div>
-        </Reveal>
-      </Section>
+            <p className="mt-8 text-sm text-sand/75">
+              ★ {avg.toFixed(1)} guest rating · {suites.length} private suites · 8 min to OGG · Self check-in 24/7
+            </p>
+          </Reveal>
+        </div>
+      </section>
     </>
   )
 }
