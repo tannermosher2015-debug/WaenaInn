@@ -73,7 +73,7 @@ export default async function SuiteDetail({ params }: { params: Promise<{ slug: 
     <>
       <JsonLd data={ldData} />
       <Section className="grid gap-10 lg:grid-cols-[1.6fr_1fr]">
-      <div>
+      <div className="min-w-0">
         <Link href="/suites" className="link-underline mb-6 inline-flex items-center gap-2 text-sm text-muted">
           <span aria-hidden>←</span> All suites
         </Link>
@@ -108,7 +108,7 @@ export default async function SuiteDetail({ params }: { params: Promise<{ slug: 
           )}
         </div>
       </div>
-      <aside id="book" className="scroll-mt-28 lg:sticky lg:top-24 lg:self-start">
+      <aside id="book" className="min-w-0 scroll-mt-28 lg:sticky lg:top-24 lg:self-start">
         <BookingWidget suite={suite} />
         <ul className="mt-5 space-y-2.5 px-1 text-xs text-muted">
           {TRUST.map((t) => (

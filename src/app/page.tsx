@@ -88,7 +88,7 @@ export default function Home() {
 
       {/* ===== Hero — immersive Maui video ===== */}
       <section className="relative isolate overflow-hidden">
-        <HeroVideo src="/maui-hero.mp4" poster="/hero-maui.jpg" className="absolute inset-0 -z-10" />
+        <HeroVideo src="/maui-hero.mp4" poster="/maui-hero-poster.jpg" className="absolute inset-0 -z-10" />
         {/* soft warm scrim — keeps the top bright, grounds text at the base */}
         <div
           aria-hidden
