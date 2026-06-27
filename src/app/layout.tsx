@@ -1,20 +1,23 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Sora } from "next/font/google";
+import { Fraunces, Hanken_Grotesk } from "next/font/google";
 import { SITE } from "@/lib/site";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import "./globals.css";
 
-const body = Inter({
+const body = Hanken_Grotesk({
   subsets: ["latin"],
   variable: "--font-body",
   display: "swap",
 });
 
-const display = Sora({
+// Editorial serif with optical sizing — the signature of the redesign.
+const display = Fraunces({
   subsets: ["latin"],
   variable: "--font-display-raw",
   display: "swap",
+  style: ["normal", "italic"],
+  axes: ["opsz", "SOFT"],
 });
 
 const DESCRIPTION =
@@ -68,8 +71,14 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${body.variable} ${display.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col">
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-card focus:bg-espresso focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-sand"
+        >
+          Skip to content
+        </a>
         <Nav />
-        <main className="flex-1">{children}</main>
+        <main id="main" className="flex-1">{children}</main>
         <Footer />
       </body>
     </html>

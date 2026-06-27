@@ -60,56 +60,59 @@ export function BookingWidget({ suite }: { suite: Suite }) {
   }, [q, validation.ok, suite.name, suite.pricePerNight, checkIn, checkOut, guests])
 
   const btnBase =
-    'mt-5 w-full inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-medium transition'
-  const btnPrimary = 'bg-clay text-sand hover:brightness-110'
+    'mt-6 w-full inline-flex items-center justify-center gap-2 rounded-card px-6 py-3.5 text-sm font-medium tracking-wide transition-colors duration-300'
+  const btnPrimary = 'bg-espresso text-sand hover:bg-clay'
   const btnDisabled = 'bg-taupe text-espresso/40 cursor-not-allowed'
+  const inputCls =
+    'rounded-card border border-line bg-paper px-3 py-2.5 text-sm text-espresso focus:outline-none focus:ring-2 focus:ring-clay/40'
+  const labelCls = 'text-[0.66rem] font-medium uppercase tracking-[0.16em] text-muted'
 
   return (
-    <div className="rounded-card bg-white p-6 shadow-soft ring-1 ring-taupe/50">
+    <div className="rounded-card bg-paper p-6 shadow-soft ring-1 ring-line">
       {/* Price per night header */}
-      <p>
-        <span className="text-2xl font-semibold text-clay">${suite.pricePerNight.toFixed(2)}</span>
-        <span className="text-espresso/60"> / night</span>
+      <p className="flex items-baseline gap-1.5 border-b border-line pb-5">
+        <span className="font-display text-3xl text-clay">${suite.pricePerNight.toFixed(2)}</span>
+        <span className="text-sm uppercase tracking-widest text-muted">/ night</span>
       </p>
 
       {/* Date inputs */}
       <div className="mt-5 grid grid-cols-2 gap-3">
-        <label className="flex flex-col gap-1">
-          <span className="text-xs font-medium text-espresso/60 uppercase tracking-wide">Check-in</span>
+        <label className="flex flex-col gap-1.5">
+          <span className={labelCls}>Check-in</span>
           <input
             type="date"
             value={checkIn}
             onChange={(e) => setCheckIn(e.target.value)}
-            className="rounded-lg border border-taupe px-3 py-2 text-sm text-espresso bg-white focus:outline-none focus:ring-2 focus:ring-clay/50"
+            className={inputCls}
           />
         </label>
-        <label className="flex flex-col gap-1">
-          <span className="text-xs font-medium text-espresso/60 uppercase tracking-wide">Check-out</span>
+        <label className="flex flex-col gap-1.5">
+          <span className={labelCls}>Check-out</span>
           <input
             type="date"
             value={checkOut}
             onChange={(e) => setCheckOut(e.target.value)}
-            className="rounded-lg border border-taupe px-3 py-2 text-sm text-espresso bg-white focus:outline-none focus:ring-2 focus:ring-clay/50"
+            className={inputCls}
           />
         </label>
       </div>
 
       {/* Guests input */}
-      <label className="mt-3 flex flex-col gap-1">
-        <span className="text-xs font-medium text-espresso/60 uppercase tracking-wide">Guests</span>
+      <label className="mt-3 flex flex-col gap-1.5">
+        <span className={labelCls}>Guests</span>
         <input
           type="number"
           min={1}
           max={suite.maxGuests}
           value={guests}
           onChange={(e) => setGuests(Number(e.target.value))}
-          className="rounded-lg border border-taupe px-3 py-2 text-sm text-espresso bg-white focus:outline-none focus:ring-2 focus:ring-clay/50"
+          className={inputCls}
         />
       </label>
 
       {/* Price breakdown */}
       {q && (
-        <ul className="mt-5 space-y-2 text-sm text-espresso/80 border-t border-taupe/60 pt-4">
+        <ul className="mt-6 space-y-2.5 border-t border-line pt-5 text-sm text-espresso/80">
           <li className="flex justify-between">
             <span>
               ${suite.pricePerNight.toFixed(2)} × {q.nights} night{q.nights !== 1 ? 's' : ''}
@@ -124,7 +127,7 @@ export function BookingWidget({ suite }: { suite: Suite }) {
             <span>Hawaii taxes ({(TAX_RATE * 100).toFixed(2)}%)</span>
             <span>${q.tax.toFixed(2)}</span>
           </li>
-          <li className="flex justify-between font-semibold text-espresso border-t border-taupe/60 pt-2">
+          <li className="flex justify-between border-t border-line pt-2.5 font-display text-base text-espresso">
             <span>Total</span>
             <span>${q.total.toFixed(2)}</span>
           </li>
@@ -135,6 +138,7 @@ export function BookingWidget({ suite }: { suite: Suite }) {
       {validation.ok && mailtoHref ? (
         <a href={mailtoHref} className={`${btnBase} ${btnPrimary}`}>
           Request to book
+          <span aria-hidden>→</span>
         </a>
       ) : (
         <button disabled className={`${btnBase} ${btnDisabled}`}>
@@ -143,7 +147,7 @@ export function BookingWidget({ suite }: { suite: Suite }) {
       )}
 
       {/* Helper text */}
-      <p className="mt-3 text-center text-xs text-espresso/50">
+      <p className="mt-3 text-center text-xs text-muted">
         {validation.ok
           ? "Your dates aren't charged — we'll confirm by email. Secure online card payment is coming soon."
           : validation.error ?? 'Select your dates'}

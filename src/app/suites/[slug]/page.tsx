@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { getAllSuites, getSuite } from '@/lib/suites'
 import { Section } from '@/components/Section'
@@ -73,36 +74,46 @@ export default async function SuiteDetail({ params }: { params: Promise<{ slug: 
       <JsonLd data={ldData} />
       <Section className="grid gap-10 lg:grid-cols-[1.6fr_1fr]">
       <div>
+        <Link href="/suites" className="link-underline mb-6 inline-flex items-center gap-2 text-sm text-muted">
+          <span aria-hidden>←</span> All suites
+        </Link>
         <Gallery photos={suite.photos} alt={suite.name} />
-        <div className="mt-8">
-          <div className="flex items-center gap-3">
-            <h1 className="text-3xl font-semibold">{suite.name}</h1>
+        <div className="mt-10">
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+            <h1 className="display text-[2rem] leading-tight sm:text-[2.75rem]">{suite.name}</h1>
             <RatingPill rating={suite.rating} reviews={suite.reviewCount} />
           </div>
-          <p className="mt-2 text-espresso/60">Up to {suite.maxGuests} guests · {suite.bedrooms} bedroom · {suite.bathrooms} bath</p>
-          <p className="mt-6 whitespace-pre-line leading-relaxed text-espresso/80">{suite.description}</p>
-          <h2 className="mt-10 text-xl font-semibold">Amenities</h2>
-          <div className="mt-4"><AmenityList amenities={suite.amenities} /></div>
+          <p className="mt-3 text-muted">Up to {suite.maxGuests} guests · {suite.bedrooms} bedroom · {suite.bathrooms} bath</p>
+          <p className="mt-7 max-w-2xl whitespace-pre-line text-[1.05rem] leading-relaxed text-espresso/80">{suite.description}</p>
+
+          <div className="mt-12 flex items-center gap-3">
+            <span aria-hidden className="h-px w-10 bg-clay" />
+            <span className="eyebrow">Amenities</span>
+          </div>
+          <div className="mt-5"><AmenityList amenities={suite.amenities} /></div>
 
           {reviews.length > 0 && (
-            <div className="mt-12">
+            <div className="mt-14">
               <div className="flex items-baseline justify-between gap-4">
-                <h2 className="text-xl font-semibold">What guests say</h2>
-                <a href={SITE.googleUrl} target="_blank" rel="noopener noreferrer" className="shrink-0 text-sm font-medium text-clay hover:underline">
+                <div className="flex items-center gap-3">
+                  <span aria-hidden className="h-px w-10 bg-clay" />
+                  <span className="eyebrow">What guests say</span>
+                </div>
+                <a href={SITE.googleUrl} target="_blank" rel="noopener noreferrer" className="link-underline shrink-0 text-sm font-medium text-clay">
                   All reviews →
                 </a>
               </div>
-              <div className="mt-4"><Reviews reviews={reviews.slice(0, 2)} /></div>
+              <div className="mt-6"><Reviews reviews={reviews.slice(0, 2)} /></div>
             </div>
           )}
         </div>
       </div>
       <aside id="book" className="scroll-mt-28 lg:sticky lg:top-24 lg:self-start">
         <BookingWidget suite={suite} />
-        <ul className="mt-4 space-y-2 px-1 text-xs text-espresso/70">
+        <ul className="mt-5 space-y-2.5 px-1 text-xs text-muted">
           {TRUST.map((t) => (
-            <li key={t} className="flex items-center gap-2">
-              <span aria-hidden className="text-palm">✓</span>
+            <li key={t} className="flex items-center gap-2.5">
+              <span aria-hidden className="text-clay">—</span>
               {t}
             </li>
           ))}

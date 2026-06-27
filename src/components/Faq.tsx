@@ -33,7 +33,7 @@ const FAQS: { q: string; a: string }[] = [
 
 export function Faq() {
   return (
-    <div className="mx-auto max-w-3xl overflow-hidden rounded-card bg-white shadow-soft ring-1 ring-taupe/50">
+    <div className="border-t border-line">
       <JsonLd
         data={{
           '@context': 'https://schema.org',
@@ -45,22 +45,20 @@ export function Faq() {
           })),
         }}
       />
-      <div className="divide-y divide-taupe/60">
-        {FAQS.map((f) => (
-          <details key={f.q} className="group p-5 sm:p-6">
-            <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-semibold [&::-webkit-details-marker]:hidden">
-              {f.q}
-              <span
-                aria-hidden
-                className="shrink-0 text-xl leading-none text-clay transition-transform duration-200 group-open:rotate-45"
-              >
-                +
-              </span>
-            </summary>
-            <p className="mt-3 text-sm leading-relaxed text-espresso/70">{f.a}</p>
-          </details>
-        ))}
-      </div>
+      {FAQS.map((f) => (
+        <details key={f.q} className="group border-b border-line py-6">
+          <summary className="flex cursor-pointer list-none items-center justify-between gap-6 font-display text-lg font-normal [&::-webkit-details-marker]:hidden">
+            {f.q}
+            <span
+              aria-hidden
+              className="shrink-0 text-2xl font-light leading-none text-clay transition-transform duration-300 group-open:rotate-45"
+            >
+              +
+            </span>
+          </summary>
+          <p className="mt-4 max-w-2xl text-[0.95rem] leading-relaxed text-muted">{f.a}</p>
+        </details>
+      ))}
     </div>
   )
 }

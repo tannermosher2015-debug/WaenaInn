@@ -17,42 +17,37 @@ export function HeroSearch({ maxGuests = 6 }: { maxGuests?: number }) {
     router.push(`/suites?${params.toString()}`)
   }
 
+  const labelCls = 'block text-[0.66rem] font-medium uppercase tracking-[0.18em] text-espresso/55'
+  const inputCls =
+    'mt-1 w-full bg-transparent text-sm text-espresso outline-none placeholder:text-espresso/40'
+
   return (
-    <div className="flex flex-col gap-3 rounded-2xl bg-sand/95 p-3 text-espresso shadow-soft backdrop-blur sm:flex-row sm:items-end">
-      <label className="flex-1 text-xs font-medium">
-        Check-in
-        <input
-          type="date"
-          value={checkIn}
-          onChange={(e) => setCheckIn(e.target.value)}
-          className="mt-1 w-full rounded-lg border border-taupe bg-white px-3 py-2 text-sm"
-        />
+    <div className="flex flex-col gap-px overflow-hidden rounded-card bg-paper/95 shadow-soft ring-1 ring-line backdrop-blur sm:flex-row sm:items-stretch sm:divide-x sm:divide-line">
+      <label className="flex-1 px-5 py-3.5">
+        <span className={labelCls}>Check-in</span>
+        <input type="date" value={checkIn} onChange={(e) => setCheckIn(e.target.value)} className={inputCls} />
       </label>
-      <label className="flex-1 text-xs font-medium">
-        Check-out
-        <input
-          type="date"
-          value={checkOut}
-          onChange={(e) => setCheckOut(e.target.value)}
-          className="mt-1 w-full rounded-lg border border-taupe bg-white px-3 py-2 text-sm"
-        />
+      <label className="flex-1 px-5 py-3.5">
+        <span className={labelCls}>Check-out</span>
+        <input type="date" value={checkOut} onChange={(e) => setCheckOut(e.target.value)} className={inputCls} />
       </label>
-      <label className="text-xs font-medium sm:w-24">
-        Guests
+      <label className="px-5 py-3.5 sm:w-28">
+        <span className={labelCls}>Guests</span>
         <input
           type="number"
           min={1}
           max={maxGuests}
           value={guests}
           onChange={(e) => setGuests(Number(e.target.value))}
-          className="mt-1 w-full rounded-lg border border-taupe bg-white px-3 py-2 text-sm"
+          className={inputCls}
         />
       </label>
       <button
         onClick={search}
-        className="rounded-full bg-clay px-7 py-2.5 text-sm font-medium text-sand transition hover:brightness-110"
+        className="group flex items-center justify-center gap-2 bg-espresso px-7 py-4 text-sm font-medium tracking-wide text-sand transition-colors duration-300 hover:bg-clay sm:py-0"
       >
-        Search suites
+        Find a suite
+        <span aria-hidden className="transition-transform duration-300 group-hover:translate-x-0.5">→</span>
       </button>
     </div>
   )
