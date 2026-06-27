@@ -46,7 +46,7 @@ export function SuitesGrid({
             {t.label}
           </button>
         ))}
-        <label className="ml-auto flex items-center gap-2 text-sm text-muted">
+        <label className="ml-auto flex items-center gap-2 py-1.5 text-sm text-muted">
           <input
             type="checkbox"
             checked={featuredOnly}

@@ -58,8 +58,10 @@ export default function Home() {
     image: `${SITE.url}/hero-maui.jpg`,
     address: {
       '@type': 'PostalAddress',
-      addressLocality: 'Wailuku',
-      addressRegion: 'HI',
+      streetAddress: SITE.streetAddress,
+      addressLocality: SITE.city,
+      addressRegion: SITE.region,
+      postalCode: SITE.postalCode,
       addressCountry: 'US',
     },
     areaServed: 'Maui, Hawaii',

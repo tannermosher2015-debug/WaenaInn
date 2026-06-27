@@ -14,7 +14,7 @@ export function Nav() {
         <ul className="hidden items-center gap-9 text-sm md:flex">
           {SITE.nav.map((n) => (
             <li key={n.href}>
-              <Link href={n.href} className="link-underline py-1 text-espresso/75 hover:text-espresso">
+              <Link href={n.href} className="link-underline inline-block py-2.5 text-espresso/75 hover:text-espresso">
                 {n.label}
               </Link>
             </li>
@@ -23,9 +23,9 @@ export function Nav() {
 
         <Link
           href="/suites"
-          className="hidden items-center gap-2 text-sm font-medium text-espresso md:inline-flex"
+          className="hidden items-center gap-2 py-2.5 text-sm font-medium text-espresso md:inline-flex"
         >
-          <span className="link-underline py-1">Reserve</span>
+          <span className="link-underline">Reserve</span>
           <span aria-hidden className="text-clay">→</span>
         </Link>
       </nav>

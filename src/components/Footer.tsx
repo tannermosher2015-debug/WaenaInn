@@ -17,18 +17,18 @@ export function Footer() {
         <div className="text-sm leading-relaxed">
           <p className="eyebrow !text-sand/45">Visit</p>
           <p className="mt-3 text-sand/80">{SITE.address}</p>
-          <a href={`mailto:${SITE.email}`} className="link-underline mt-2 inline-block hover:text-sand">
+          <a href={`mailto:${SITE.email}`} className="link-underline mt-1 inline-block py-1.5 hover:text-sand">
             {SITE.email}
           </a>
         </div>
 
-        <ul className="space-y-3 text-sm">
-          <li className="eyebrow !text-sand/45 !mb-1">Inn</li>
-          <li><Link href="/suites" className="link-underline hover:text-sand">Suites</Link></li>
-          <li><Link href="/about" className="link-underline hover:text-sand">About</Link></li>
-          <li><Link href="/contact" className="link-underline hover:text-sand">Contact</Link></li>
-          <li><Link href="/privacy" className="link-underline hover:text-sand">Privacy Policy</Link></li>
-          <li><Link href="/terms" className="link-underline hover:text-sand">Terms &amp; Conditions</Link></li>
+        <ul className="space-y-0.5 text-sm">
+          <li className="eyebrow !mb-1.5 !text-sand/45">Inn</li>
+          <li><Link href="/suites" className="link-underline inline-block py-1.5 hover:text-sand">Suites</Link></li>
+          <li><Link href="/about" className="link-underline inline-block py-1.5 hover:text-sand">About</Link></li>
+          <li><Link href="/contact" className="link-underline inline-block py-1.5 hover:text-sand">Contact</Link></li>
+          <li><Link href="/privacy" className="link-underline inline-block py-1.5 hover:text-sand">Privacy Policy</Link></li>
+          <li><Link href="/terms" className="link-underline inline-block py-1.5 hover:text-sand">Terms &amp; Conditions</Link></li>
         </ul>
       </div>
 
@@ -40,7 +40,7 @@ export function Footer() {
             href="https://frontlinewebdesign.tech"
             target="_blank"
             rel="noopener noreferrer"
-            className="link-underline font-medium text-sand/80 hover:text-sand"
+            className="link-underline inline-block py-1 font-medium text-sand/80 hover:text-sand"
           >
             Frontline Web Designs
           </a>
