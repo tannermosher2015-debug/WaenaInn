@@ -1,13 +1,13 @@
 import Link from 'next/link'
 import { SITE } from '@/lib/site'
-import { CenterMark } from './CenterMark'
+import { Botanical } from './Botanical'
 
 export function Nav() {
   return (
     <header className="sticky top-0 z-40 border-b border-line/70 bg-sand/85 backdrop-blur-md">
       <nav className="container-page flex h-[4.5rem] items-center justify-between">
         <Link href="/" className="group flex items-center gap-2.5" aria-label={`${SITE.name} — home`}>
-          <CenterMark className="h-4 w-4 text-clay transition-transform duration-500 group-hover:rotate-90" />
+          <Botanical variant="sprig" className="h-5 w-5 text-palm transition-transform duration-500 group-hover:rotate-6" />
           <span className="font-display text-[1.35rem] font-medium tracking-tight">{SITE.name}</span>
         </Link>
 

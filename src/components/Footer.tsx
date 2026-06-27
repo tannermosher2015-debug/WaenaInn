@@ -1,14 +1,14 @@
 import Link from 'next/link'
 import { SITE } from '@/lib/site'
-import { CenterMark } from './CenterMark'
+import { Botanical } from './Botanical'
 
 export function Footer() {
   return (
-    <footer className="mt-28 bg-espresso text-sand/75">
+    <footer className="mt-28 bg-ink text-sand/75">
       <div className="container-page grid gap-12 py-16 sm:grid-cols-[1.4fr_1fr_1fr] sm:py-20">
         <div>
           <div className="flex items-center gap-2.5 text-sand">
-            <CenterMark className="h-4 w-4 text-brasslt" />
+            <Botanical variant="sprig" className="h-4 w-4 text-butter" />
             <p className="font-display text-2xl font-medium">{SITE.name}</p>
           </div>
           <p className="mt-4 max-w-xs text-sm leading-relaxed">{SITE.tagline}</p>

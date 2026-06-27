@@ -44,7 +44,7 @@ export function HeroSearch({ maxGuests = 6 }: { maxGuests?: number }) {
       </label>
       <button
         onClick={search}
-        className="group flex items-center justify-center gap-2 bg-espresso px-7 py-4 text-sm font-medium tracking-wide text-sand transition-colors duration-300 hover:bg-clay sm:py-0"
+        className="group flex items-center justify-center gap-2 bg-clay px-7 py-4 text-sm font-medium tracking-wide text-paper transition-colors duration-300 hover:bg-espresso sm:py-0"
       >
         Find a suite
         <span aria-hidden className="transition-transform duration-300 group-hover:translate-x-0.5">→</span>

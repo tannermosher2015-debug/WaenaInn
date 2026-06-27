@@ -1,5 +1,5 @@
 import { Reveal } from './Reveal'
-import { CenterMark } from './CenterMark'
+import { Botanical } from './Botanical'
 
 export function Section({ id, className = '', children }: { id?: string; className?: string; children: React.ReactNode }) {
   return <section id={id} className={`container-page py-16 sm:py-24 lg:py-28 ${className}`}>{children}</section>
@@ -23,7 +23,7 @@ export function PageHero({
     <Reveal>
       <header className="mb-12 border-b border-line pb-10 sm:mb-16 sm:pb-12">
         <div className="flex items-center gap-3">
-          <CenterMark className="h-4 w-4 text-clay" />
+          <Botanical variant="sprig" className="h-5 w-5 text-palm" />
           <span className="eyebrow">{eyebrow}</span>
         </div>
         <h1 className="display mt-5 max-w-3xl text-[2.5rem] leading-[1.02] sm:text-[3.5rem]">{title}</h1>

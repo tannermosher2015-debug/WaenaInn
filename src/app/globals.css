@@ -1,24 +1,26 @@
 @import "tailwindcss";
 
 @theme {
-  /* Warm-editorial palette — paper, ink, and a restrained terracotta accent */
-  --color-sand: #F3EDE3; /* page / paper background */
-  --color-paper: #FBF8F2; /* raised surfaces, cards */
-  --color-espresso: #241A13; /* near-black warm ink — default text + dark sections */
-  --color-clay: #A1542F; /* terracotta accent (AA on sand) */
-  --color-palm: #2C5049; /* deep palm green */
-  --color-taupe: #D9CFC2;
-  --color-line: #CDC1B0; /* warm hairline rules */
-  --color-muted: #6A5E52; /* muted body text (AA on sand) */
-  --color-ink: #1A120C; /* deepest material surface */
-  --color-brass: #B08D4F; /* metallic accent — passes AA only on dark surfaces */
-  --color-brasslt: #C79A55; /* lighter brass for text/marks on espresso */
+  /* Soft-pastel boutique palette — bright ivory, warm cocoa ink, gentle rose
+     + sage, with blush / butter / sage tints for section bands */
+  --color-sand: #FBF6EC; /* page background — warm ivory */
+  --color-paper: #FFFDF9; /* raised surfaces, cards */
+  --color-espresso: #43382F; /* warm cocoa — primary text + soft dark buttons */
+  --color-clay: #A8584C; /* dusty rose-terracotta accent (AA on ivory) */
+  --color-palm: #6E8568; /* soft sage */
+  --color-taupe: #E4D8C4;
+  --color-line: #EADFCB; /* soft warm hairline rules */
+  --color-muted: #6E6055; /* muted body text (AA on ivory) */
+  --color-ink: #3E4A38; /* deep soft sage — footer / grounding (never harsh black) */
+  --color-blush: #F6E4DF; /* pale rose tint — section bands */
+  --color-butter: #F7ECC9; /* soft butter tint */
+  --color-sagetint: #E7EDE0; /* pale sage tint */
 
   --font-sans: var(--font-body);
   --font-display: var(--font-display-raw);
 
-  --radius-card: 0.375rem; /* near-sharp, editorial */
-  --shadow-soft: 0 18px 50px -24px rgba(36, 26, 19, 0.22);
+  --radius-card: 0.75rem; /* gentle, friendly rounding */
+  --shadow-soft: 0 18px 50px -24px rgba(67, 56, 47, 0.18);
 }
 
 @layer base {
@@ -74,13 +76,12 @@
   line-height: 1.04;
 }
 
-/* Unified filmic grade — makes mixed, budget photography read as one
-   art-directed set: gently desaturated, warmed, with a touch more contrast. */
+/* Light, airy grade — keeps photography bright and fresh, just a touch
+   livelier and warmer so the set feels cohesive without going moody. */
 .film {
-  filter: saturate(0.88) contrast(1.07) brightness(0.97) sepia(0.12);
+  filter: saturate(1.04) brightness(1.04) contrast(0.99);
 }
-/* Warm soft-light wash — add to the image's container (relative) for the
-   richer, moodier "graded" look on hero/closing moments. */
+/* Gentle warm wash for the framed/feature images — soft, not dark. */
 .film-warm {
   position: relative;
 }
@@ -89,31 +90,22 @@
   position: absolute;
   inset: 0;
   z-index: 1;
-  background: #5a3a1c;
+  background: #ffefd9;
   mix-blend-mode: soft-light;
-  opacity: 0.45;
+  opacity: 0.22;
   pointer-events: none;
 }
-/* Fine film grain — the "shot on film" tell that reads expensive */
+/* Whisper of grain — barely there, just enough to feel crafted. */
 .film-warm::before {
   content: "";
   position: absolute;
   inset: 0;
   z-index: 1;
   pointer-events: none;
-  opacity: 0.09;
+  opacity: 0.04;
   mix-blend-mode: overlay;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   background-size: 140px 140px;
-}
-
-/* Brass seal — the brand crest treatment on dark surfaces */
-.seal {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid var(--color-brass);
-  border-radius: 9999px;
 }
 
 /* Underline that wipes in on hover */
@@ -130,19 +122,6 @@
 }
 
 /* ── Motion ───────────────────────────────────────────────── */
-
-/* Slow, gentle Ken-Burns drift for full-bleed hero imagery */
-@keyframes kenburns {
-  from {
-    transform: scale(1.02);
-  }
-  to {
-    transform: scale(1.09);
-  }
-}
-.animate-kenburns {
-  animation: kenburns 34s ease-in-out infinite alternate;
-}
 
 /* Scroll-reveal: hidden until <Reveal> adds .is-visible */
 .reveal {
@@ -186,9 +165,6 @@
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
-  }
-  .animate-kenburns {
-    animation: none;
   }
   .reveal {
     opacity: 1;
