@@ -36,11 +36,26 @@ export function Reveal({
     return () => io.disconnect()
   }, [])
 
-  const base = variant === 'mask' ? 'reveal-mask' : 'reveal'
+  // Mask variant clips an INNER wrapper, never the observed element itself:
+  // a clip-path of inset(... 100% ...) zeroes the element's IntersectionObserver
+  // rect, so observing the clipped node would deadlock (it never reports
+  // intersecting → .is-visible is never added → it stays clipped forever).
+  if (variant === 'mask') {
+    return (
+      <div
+        ref={ref}
+        className={`reveal-mask ${visible ? 'is-visible' : ''} ${className}`}
+        style={{ transitionDelay: `${delay}ms` }}
+      >
+        <div className="reveal-mask__inner">{children}</div>
+      </div>
+    )
+  }
+
   return (
     <div
       ref={ref}
-      className={`${base} ${visible ? 'is-visible' : ''} ${className}`}
+      className={`reveal ${visible ? 'is-visible' : ''} ${className}`}
       style={{ transitionDelay: `${delay}ms` }}
     >
       {children}

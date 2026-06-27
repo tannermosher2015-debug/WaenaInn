@@ -159,13 +159,16 @@
 }
 
 /* Mask-reveal for imagery — the frame wipes open top-to-bottom with a slow
-   settle, instead of the generic fade-up. Reads hand-crafted, not AOS. */
-.reveal-mask {
+   settle, instead of the generic fade-up. Reads hand-crafted, not AOS.
+   The clip lives on an inner wrapper, NOT on .reveal-mask itself: a target
+   clipped to inset(... 100% ...) reports a zero IntersectionObserver rect, so
+   observing the clipped node deadlocks (never intersects → never reveals). */
+.reveal-mask__inner {
   clip-path: inset(0 0 100% 0);
   transition: clip-path 1.15s cubic-bezier(0.22, 1, 0.36, 1);
   will-change: clip-path;
 }
-.reveal-mask.is-visible {
+.reveal-mask.is-visible .reveal-mask__inner {
   clip-path: inset(0 0 0 0);
 }
 
@@ -173,7 +176,7 @@
    so content (including the hero image) is never left hidden. */
 @media (scripting: none) {
   .reveal,
-  .reveal-mask {
+  .reveal-mask__inner {
     opacity: 1;
     transform: none;
     clip-path: none;
@@ -192,7 +195,7 @@
     transform: none;
     transition: none;
   }
-  .reveal-mask {
+  .reveal-mask__inner {
     clip-path: none;
     transition: none;
   }
