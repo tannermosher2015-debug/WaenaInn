@@ -54,7 +54,7 @@ export function HeroFramed({
 
       <div className="container-page px-3 pb-6 pt-24 sm:px-6 sm:pt-28">
         {/* the frosted frame */}
-        <div className="relative flex min-h-[82vh] flex-col rounded-[1.75rem] border border-paper/25 bg-paper/[0.07] p-6 backdrop-blur-sm transform-gpu sm:min-h-[80vh] sm:p-9 lg:p-12">
+        <div className="relative flex min-h-[82vh] flex-col rounded-[1.75rem] border border-paper/30 bg-gradient-to-b from-paper/[0.12] to-paper/[0.04] p-6 shadow-[inset_0_1px_0_rgba(255,253,249,0.25)] transform-gpu sm:min-h-[80vh] sm:p-9 lg:p-12">
           {/* top bar inside the frame */}
           <Reveal>
             <div className="flex items-center justify-between gap-4">
