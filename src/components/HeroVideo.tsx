@@ -49,7 +49,7 @@ export function HeroVideo({
           autoPlay
           preload="auto"
           poster={poster}
-          className="film absolute inset-0 h-full w-full object-cover"
+          className="absolute inset-0 h-full w-full object-cover transform-gpu [backface-visibility:hidden]"
         >
           <source src={src} type="video/mp4" />
         </video>

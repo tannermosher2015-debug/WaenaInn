@@ -54,7 +54,7 @@ export function HeroFramed({
 
       <div className="container-page px-3 pb-6 pt-24 sm:px-6 sm:pt-28">
         {/* the frosted frame */}
-        <div className="relative flex min-h-[82vh] flex-col rounded-[1.75rem] border border-paper/25 bg-paper/[0.07] p-6 backdrop-blur-md sm:min-h-[80vh] sm:p-9 lg:p-12">
+        <div className="relative flex min-h-[82vh] flex-col rounded-[1.75rem] border border-paper/25 bg-paper/[0.07] p-6 backdrop-blur-sm transform-gpu sm:min-h-[80vh] sm:p-9 lg:p-12">
           {/* top bar inside the frame */}
           <Reveal>
             <div className="flex items-center justify-between gap-4">
@@ -106,7 +106,7 @@ export function HeroFramed({
 
             {/* functional booking card */}
             <Reveal delay={230}>
-              <div className="w-full rounded-[1.25rem] bg-espresso/85 p-6 text-paper ring-1 ring-paper/15 backdrop-blur-md sm:w-[22rem]">
+              <div className="w-full rounded-[1.25rem] bg-espresso/90 p-6 text-paper ring-1 ring-paper/15 sm:w-[22rem]">
                 <p className="eyebrow !text-butter">Featured suite</p>
                 <h2 className="display mt-1.5 text-2xl leading-tight text-paper">{suiteLabel}</h2>
                 <p className="mt-1 text-sm text-paper/70">{suiteSub}</p>
